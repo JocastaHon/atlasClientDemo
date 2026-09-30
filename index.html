@@ -7,7 +7,7 @@
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:#f7f9fc;color:#111827;font-size:13px}
 .app{display:flex;min-height:100vh}.side{width:230px;background:linear-gradient(180deg,#0c192d 0%,#17263b 100%);color:#b8c9df;position:fixed;inset:0 auto 0 0;padding:14px 10px;border-right:1px solid #25364d;overflow-y:auto;overflow-x:hidden}
-.logo{height:52px;font-size:20px;font-weight:800;color:#fff;text-align:center;margin:0 0 10px;letter-spacing:1px;display:flex;flex-direction:column;justify-content:center}.logo small{display:block;font-size:6px;letter-spacing:1.8px;margin-top:1px}
+.logo{height:72px;margin:0 0 10px;display:flex;align-items:center;justify-content:center}.logo .atlas-logo{display:block;width:190px;height:62px;max-width:100%}
 .nav{height:48px;padding:0 9px;display:flex;align-items:center;border-radius:6px;margin:0;color:#b9cce4;font-size:14px;border-bottom:1px solid rgba(255,255,255,.055)}.nav.active{height:31px;background:#0b4265;color:#fff;font-weight:700;margin:0 0 9px;border-bottom:0}.nav span{margin-left:auto;color:#8395ad;font-size:16px}.nav.active:before{content:none !important;display:none !important}
 .subnav{display:none;margin:-2px 0 5px 27px;padding-left:8px;border-left:1px solid rgba(255,255,255,.12)}.subnav.open{display:block}.subnav a{display:block;color:#91a8c3;text-decoration:none;font-size:12px;padding:8px 9px;border-radius:5px}.subnav a:hover{background:rgba(255,255,255,.05);color:#fff}.accordion{cursor:pointer}.accordion.open span{transform:rotate(90deg)}.accordion span{transition:.15s}
 .main{margin-left:230px;width:calc(100% - 230px)}header{height:46px;background:#fff;border-bottom:1px solid #e7ebf1;display:flex;align-items:center;justify-content:space-between;padding:0 34px}
@@ -4903,16 +4903,36 @@ button[style*="#1E3B8A"]:hover{
 
 </head>
 <body><div class="app">
-<aside class="side"><div class="logo">DRONE<small>AS A SERVICE .COM</small></div>
+<aside class="side">
+<div class="logo" aria-label="DaaS Atlas">
+<svg class="atlas-logo" viewBox="20 8 215 72" role="img" aria-labelledby="atlasLogoTitle">
+  <title id="atlasLogoTitle">DaaS Atlas</title>
+  <rect width="270" height="88" fill="#0d182b"/>
+  <g fill="none" stroke="#fff" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round">
+    <ellipse cx="43" cy="35" rx="15" ry="6" transform="rotate(-13 43 35)"/>
+    <ellipse cx="69" cy="22" rx="10" ry="5" transform="rotate(10 69 22)"/>
+    <ellipse cx="103" cy="31" rx="12" ry="6" transform="rotate(13 103 31)"/>
+    <circle cx="95" cy="53" r="11"/>
+    <path d="M51 34 65 31M72 27l8 8M91 34l-8 8M88 49 78 45"/>
+    <path d="m62 32 17 1 10 8-8 14-18 3-10-9 3-11z" fill="#fff" stroke-width="1.5"/>
+    <path d="m62 55-4 12 10-3 5-8M88 50l-7-4"/>
+    <path d="M35 35h16M63 22h12M96 31h14M88 53h14" stroke-width="1.35" opacity=".8"/>
+  </g>
+  <g fill="#fff" font-family="Arial, Helvetica, sans-serif" font-weight="600">
+    <text x="123" y="39" font-size="30" letter-spacing="-.8">DaaS</text>
+    <text x="123" y="72" font-size="30" letter-spacing="-.8">Atlas</text>
+  </g>
+</svg>
+</div>
 <a class="nav active page-link" href="#" data-page="dashboard">▦ &nbsp; Dashboard</a>
 
-<div class="nav accordion" onclick="toggleNav(this)">▣ &nbsp; Job Management <span>›</span></div>
-<div class="subnav">
+<div class="nav accordion" onclick="event.stopPropagation(); toggleNav(this)">▣ &nbsp; Job Management <span>›</span></div>
+<div class="subnav job-management-subnav">
   <a href="#" class="job-survey-requests-link" data-route="survey-requests">Survey Requests</a>
   <a href="#" class="job-quotes-link" data-route="quotes">Quotes</a>
 </div>
 
-<div class="nav accordion" onclick="toggleNav(this)">$ &nbsp; Billing <span>›</span></div>
+<div class="nav accordion" onclick="event.stopPropagation(); toggleNav(this)">$ &nbsp; Billing <span>›</span></div>
 <div class="subnav">
   <a href="#">Invoices</a>
   <a href="#">DAAS Bills</a>
@@ -4940,7 +4960,6 @@ button[style*="#1E3B8A"]:hover{
 <main class="content"><h1>Welcome, Consumer Branch Admin</h1><div class="sub">Here's your complete overview.</div>
 <div class="actions dashboard-quick-actions">
   <button class="btn dashboard-quote-action" id="dashboardCreateQuote">＋ Add New Request</button>
-  <button class="btn dashboard-client-action" id="dashboardNewClient">＋ New Client</button>
 </div>
 <div class="grid4">
 <div class="card metric"><div class="label">Total Clients</div><div class="value">6</div></div><div class="card metric"><div class="label">Total Tasks/Jobs</div><div class="value">27</div></div><div class="card metric"><div class="label">Active Dispatches</div><div class="value">1</div></div><div class="card metric"><div class="label">Total Revenue</div><div class="value">$4,469.60</div></div>
@@ -5292,6 +5311,13 @@ button[style*="#1E3B8A"]:hover{
 <div class="survey-row" data-client="Consumer Company" data-address="123 Main Street, Austin, TX 78701"><div><b>REQ-132</b></div><div>Aug 21, 2026</div><div>123 Main Street, Austin, TX 78701</div><div><span class="survey-status pending">Pending</span></div><div class="survey-actions"><button class="icon-action view-action" title="View" aria-label="View request"><svg viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.7"/></svg></button><button class="icon-action survey-edit-action" title="Edit" aria-label="Edit request"><svg viewBox="0 0 24 24"><path d="M4 20h4l11-11-4-4L4 16v4Z"/><path d="m13.5 6.5 4 4"/></svg></button><div class="survey-more-wrap"><button class="icon-action survey-more-trigger" title="More actions" aria-label="More actions"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="19" r="1.3" fill="currentColor" stroke="none"/></svg></button><div class="survey-more-menu"><button class="survey-more-item"><svg viewBox="0 0 24 24"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg><span>Duplicate</span></button></div></div></div></div>
 <div class="survey-row" data-client="QA Tester 3" data-address="345 Apple St, Toronto, ON"><div><b>REQ-131</b></div><div>Aug 20, 2026</div><div>345 Apple St, Toronto, ON</div><div><span class="survey-status quoted">Quoted</span></div><div class="survey-actions"><button class="icon-action view-action" title="View" aria-label="View request"><svg viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.7"/></svg></button><button class="icon-action survey-edit-action" title="Edit" aria-label="Edit request"><svg viewBox="0 0 24 24"><path d="M4 20h4l11-11-4-4L4 16v4Z"/><path d="m13.5 6.5 4 4"/></svg></button><div class="survey-more-wrap"><button class="icon-action survey-more-trigger" title="More actions" aria-label="More actions"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="19" r="1.3" fill="currentColor" stroke="none"/></svg></button><div class="survey-more-menu"><button class="survey-more-item view-created-quote"><svg viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg><span>View Quote</span></button><button class="survey-more-item"><svg viewBox="0 0 24 24"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg><span>Duplicate</span></button></div></div></div></div>
 <div class="survey-row" data-client="Consumer Company" data-address="1123 Apple, Toronto, ON"><div><b>REQ-129</b></div><div>Aug 18, 2026</div><div>1123 Apple, Toronto, ON</div><div><span class="survey-status approved">Approved</span></div><div class="survey-actions"><button class="icon-action view-action" title="View" aria-label="View request"><svg viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.7"/></svg></button><button class="icon-action survey-edit-action" title="Edit" aria-label="Edit request"><svg viewBox="0 0 24 24"><path d="M4 20h4l11-11-4-4L4 16v4Z"/><path d="m13.5 6.5 4 4"/></svg></button><div class="survey-more-wrap"><button class="icon-action survey-more-trigger" title="More actions" aria-label="More actions"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="19" r="1.3" fill="currentColor" stroke="none"/></svg></button><div class="survey-more-menu"><button class="survey-more-item view-created-quote"><svg viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg><span>View Quote</span></button><button class="survey-more-item"><svg viewBox="0 0 24 24"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg><span>Duplicate</span></button></div></div></div></div>
+</div></main></div>
+<div id="event-survey-requests-page" class="page-view"><main class="survey-requests-page event-survey-requests-page">
+<div class="survey-requests-head"><div><h1>Event Survey Requests</h1><p>Review and manage survey requests associated with scheduled events.</p></div><button class="survey-request-primary" type="button">＋ New Event Survey Request</button></div>
+<div class="survey-filter-box"><div class="survey-filter-row"><input class="survey-search" placeholder="Search request #, event, client, or location..."><select class="survey-filter"><option>All Statuses</option><option>Pending</option><option>Scheduled</option><option>Completed</option></select><select class="survey-filter"><option>All Events</option></select></div></div>
+<div class="survey-table event-survey-table">
+<div class="survey-row head event-survey-row"><div>Request #</div><div>Date</div><div>Event</div><div>Location</div><div>Status</div><div>Actions</div></div>
+<div class="event-survey-empty"><span class="event-survey-empty-icon">◇</span><b>No event survey requests yet</b><span>New event-based requests will appear here.</span></div>
 </div></main></div>
 <div id="view-survey-request-page" class="page-view">
 <main class="survey-view-page">
@@ -5689,9 +5715,9 @@ button[style*="#1E3B8A"]:hover{
         <svg class="vq-btn-icon" viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>
         Download PDF
       </button>
-      <button type="button" class="vq-primary">
-        <svg class="vq-btn-icon" viewBox="0 0 24 24"><path d="M4 20h4l11-11-4-4L4 16v4Z"/><path d="m13.5 6.5 4 4"/></svg>
-        Edit Quote
+      <button type="button" class="vq-outline" id="vqPrint">
+        <svg class="vq-btn-icon" viewBox="0 0 24 24"><path d="M7 8V3h10v5"/><path d="M7 17H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M7 14h10v7H7z"/></svg>
+        Print Quote
       </button>
     </div>
   </div>
@@ -6361,7 +6387,7 @@ button[style*="#1E3B8A"]:hover{
 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4"/><path d="m7.5 8.5 4.5-4.5 4.5 4.5"/><path d="M5 14v5h14v-5"/></svg>
 <span>Import</span>
 </button>
-      <button class="crm-btn primary" id="contextAdd">＋ Add Client</button>
+      <button class="crm-btn primary" id="contextAdd">＋ New Client</button>
     </div>
   </div>
 
@@ -6746,7 +6772,29 @@ button[style*="#1E3B8A"]:hover{
 </div>
 </main>
 </div>
-</div></div><script>function toggleNav(el){const m=el.nextElementSibling,w=el.classList.contains('open');document.querySelectorAll('.accordion.open').forEach(x=>{x.classList.remove('open');if(x.nextElementSibling)x.nextElementSibling.classList.remove('open')});if(!w){el.classList.add('open');m.classList.add('open')}}</script>
+</div></div><script>
+function toggleNav(el){
+  const sidebar=el.closest('.side');
+  const menu=el.nextElementSibling;
+  const shouldOpen=!el.classList.contains('open');
+
+  if(!sidebar) return;
+
+  sidebar.querySelectorAll(':scope > .nav.accordion').forEach(function(nav){
+    nav.classList.remove('open');
+    const navMenu=nav.nextElementSibling;
+    if(navMenu && navMenu.classList.contains('subnav')){
+      navMenu.classList.remove('open');
+      navMenu.style.removeProperty('display');
+    }
+  });
+
+  if(shouldOpen && menu && menu.classList.contains('subnav')){
+    el.classList.add('open');
+    menu.classList.add('open');
+  }
+}
+</script>
 <script>
 function showPage(name){
   const target=document.getElementById(name+'-page');
@@ -6841,7 +6889,7 @@ document.querySelectorAll('.crm-tab').forEach(tab=>{
     const panel=document.getElementById(tab.dataset.tab);
     if(panel) panel.classList.add('active');
     const add=document.getElementById('contextAdd');
-    if(add) add.textContent=tab.dataset.tab==='clients'?'＋ Add Client':'＋ New Opportunity';
+    if(add) add.textContent=tab.dataset.tab==='clients'?'＋ New Client':'＋ New Opportunity';
     const crmPage=document.getElementById('crm-page');
     if(crmPage) crmPage.classList.toggle('opportunities-active',tab.dataset.tab==='opportunities');
     const importBtn=document.getElementById('crmImportButton');
@@ -7006,7 +7054,7 @@ document.querySelectorAll('.view-switch button').forEach(btn=>{
 (function(){
  const add=document.getElementById('contextAdd'), modal=document.getElementById('addClientModal');
  const close=document.getElementById('closeClientModal'), cancel=document.getElementById('cancelClientModal');
- function openModal(){ if(add && add.textContent.includes('Add Client')) modal.classList.add('open'); }
+ function openModal(){ if(add && add.textContent.includes('Client')) modal.classList.add('open'); }
  function closeModal(){ modal.classList.remove('open'); }
  if(add) add.addEventListener('click',openModal);
  if(close) close.addEventListener('click',closeModal);
@@ -7025,7 +7073,7 @@ document.querySelectorAll('.view-switch button').forEach(btn=>{
  const editors=document.getElementById('contactEditors');
 
  function openAddClientPage(){
-   if(!add || !add.textContent.includes('Add Client')) return;
+   if(!add || !add.textContent.includes('Client')) return;
    document.querySelectorAll('.page-view').forEach(p=>p.classList.remove('active'));
    document.getElementById('add-client-page').classList.add('active');
    document.querySelectorAll('.page-link').forEach(a=>a.classList.remove('active'));
@@ -7803,7 +7851,6 @@ document.querySelectorAll('.view-switch button').forEach(btn=>{
 <script>
 (function(){
  const quote=document.getElementById('dashboardCreateQuote');
- const client=document.getElementById('dashboardNewClient');
 
  function showView(id){
    document.querySelectorAll('.page-view').forEach(p=>p.classList.remove('active'));
@@ -7814,7 +7861,6 @@ document.querySelectorAll('.view-switch button').forEach(btn=>{
  }
 
  if(quote)quote.addEventListener('click',()=>showView('new-survey-request-page'));
- if(client)client.addEventListener('click',()=>showView('add-client-page'));
 })();
 </script>
 
@@ -12170,7 +12216,9 @@ button:disabled{border-color:transparent!important;outline:none!important}
   modal.querySelector('.quote-decision-confirm').setAttribute('onclick','window.__submitQuoteDecision()');
   note.addEventListener('input',function(){if(note.value.trim()){note.classList.remove('invalid');error.classList.remove('show');}});document.addEventListener('keydown',function(event){if(event.key==='Escape'&&modal.classList.contains('open'))closeModal();});
   window.__downloadViewQuotePdf=function(){const page=document.getElementById('view-quote-page'),summary=[...page.querySelectorAll('.vq-summary>div')].map(function(item){return item.textContent.trim();}),property=[...page.querySelectorAll('.vq-property-item')].map(function(item){return item.textContent.trim();}),services=[...page.querySelectorAll('.vq-row:not(.head)')].map(function(item){return item.textContent.trim();}),total=page.querySelector('.vq-totals .total')?.textContent.trim()||'',notes=page.querySelector('.vq-notes')?.textContent.trim()||'',quoteId=page.querySelector('.vq-summary b')?.textContent.trim()||'quote';makePdf(['QUOTE '+quoteId].concat(summary,property,['Services'],services,[total,'Notes: '+notes]),quoteId+'-quote');};
-  const viewDownload=document.querySelector('#view-quote-page .vq-outline');if(viewDownload){viewDownload.setAttribute('aria-label','Download quote PDF');viewDownload.setAttribute('onclick','event.preventDefault();window.__downloadViewQuotePdf()');}
+  window.__printViewQuote=function(){const page=document.getElementById('view-quote-page'),summary=[...page.querySelectorAll('.vq-summary>div')].map(function(item){return item.textContent.trim();}),property=[...page.querySelectorAll('.vq-property-item')].map(function(item){return item.textContent.trim();}),services=[...page.querySelectorAll('.vq-row:not(.head)')].map(function(item){return item.textContent.trim();}),total=page.querySelector('.vq-totals .total')?.textContent.trim()||'',notes=page.querySelector('.vq-notes')?.textContent.trim()||'',quoteId=page.querySelector('.vq-summary b')?.textContent.trim()||'quote';printLines('Quote '+quoteId,summary.concat(property,['Services'],services,[total,'Notes: '+notes]));};
+  const viewDownload=document.querySelector('#view-quote-page .vq-outline:not(#vqPrint)');if(viewDownload){viewDownload.setAttribute('aria-label','Download quote PDF');viewDownload.setAttribute('onclick','event.preventDefault();window.__downloadViewQuotePdf()');}
+  const viewPrint=document.getElementById('vqPrint');if(viewPrint){viewPrint.setAttribute('aria-label','Print quote');viewPrint.setAttribute('onclick','event.preventDefault();window.__printViewQuote()');}
 })();
 </script>
 
@@ -12260,6 +12308,183 @@ body.survey-intake-preview #new-survey-request-page .alta-section-index{top:0}
   quoted?.querySelector('.view-action')?.click();
  },0);
  window.scrollTo(0,0);
+})();
+</script>
+<style id="reference-sidebar-and-event-survey-styles">
+/* Sidebar treatment based on the supplied DaaS Atlas reference. */
+.side{
+  width:222px!important;
+  padding:0 14px 18px!important;
+  background:linear-gradient(180deg,#111b2e 0%,#172337 100%)!important;
+  border-right:1px solid #2a384d!important;
+  color:#a9bdd5!important;
+}
+.main{margin-left:222px!important;width:calc(100% - 222px)!important}
+.main>header{left:222px!important}
+body.survey-intake-preview .main{margin-left:222px!important;width:calc(100% - 222px)!important}
+body.survey-intake-preview .main>header{left:222px!important}
+.atlas-logo{
+  height:63px!important;
+  margin:0 -14px 8px!important;
+  padding:0 27px!important;
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:8px!important;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  color:#fff!important;
+  font-size:23px!important;
+  line-height:.9!important;
+  letter-spacing:-.7px!important;
+  text-align:left!important;
+}
+.atlas-logo svg{width:60px;height:38px;fill:none;stroke:#fff;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:0 0 60px}
+.atlas-logo svg path:first-child{fill:#fff;stroke:none}
+.side-collapse-handle{position:absolute;top:62px;right:-11px;z-index:4;width:22px;height:22px;display:grid;place-items:center;border:1px solid #5e6c80;border-radius:50%;background:#36455b;color:#d9e2ee;font-size:17px;line-height:1;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.side > .nav,
+.side > a.nav{
+  width:100%!important;
+  min-height:43px!important;
+  height:43px!important;
+  margin:0!important;
+  padding:0 11px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  border:0!important;
+  border-bottom:1px solid rgba(255,255,255,.055)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#a8bfd9!important;
+  font-size:13px!important;
+  font-weight:500!important;
+  text-decoration:none!important;
+}
+.side > .nav:hover{background:rgba(255,255,255,.035)!important;color:#fff!important}
+.side > .nav.active{
+  min-height:38px!important;
+  height:38px!important;
+  margin:6px 0 0!important;
+  border:0!important;
+  border-radius:6px!important;
+  background:#24456f!important;
+  color:#fff!important;
+  font-weight:700!important;
+}
+.side > .nav.accordion.open{
+  min-height:38px!important;
+  height:38px!important;
+  margin:6px 0 0!important;
+  border:0!important;
+  border-radius:6px!important;
+  background:rgba(45,61,84,.55)!important;
+  color:#fff!important;
+  font-weight:700!important;
+}
+.side .nav-leading{margin:0!important;display:flex!important;align-items:center!important;gap:9px!important;color:inherit!important}
+.side .nav-icon{width:16px!important;margin:0!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;color:#9fb4cf!important;font-size:16px!important;font-weight:400!important}
+.side .nav-icon svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
+.side .nav.active .nav-icon,.side .nav:hover .nav-icon{color:#fff!important}
+.side .nav-chevron{margin:0!important;color:#8296af!important;font-size:15px!important;font-weight:400!important;transform:none!important}
+.side .accordion.open .nav-chevron{color:#bdc9d8!important;transform:none!important}
+.side .subnav{
+  display:none;
+  margin:0 0 8px 26px!important;
+  padding:3px 0 3px 14px!important;
+  border-left:1px solid #274263!important;
+}
+.side .subnav.open{display:block!important}
+.side .subnav a{
+  min-height:33px;
+  width:100%!important;
+  box-sizing:border-box!important;
+  padding:8px 12px 8px 20px!important;
+  display:flex!important;
+  align-items:center!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#eef5ff!important;
+  font-size:12px!important;
+  font-weight:500!important;
+  line-height:1.35;
+}
+.side .subnav a:hover{background:transparent!important;color:#fff!important;text-decoration:none!important}
+.side .subnav a.job-page-selected,.side .subnav a.subnav-active{
+  position:relative!important;
+  background:#29435f!important;
+  color:#fff!important;
+  font-weight:700!important;
+  border-radius:6px!important;
+  padding:8px 12px 8px 20px!important;
+}
+.side .subnav a.job-page-selected::before,.side .subnav a.subnav-active::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:50%;
+  width:4px;
+  height:28px;
+  margin:0;
+  border-radius:999px;
+  background:#356dff;
+  transform:translateY(-50%);
+}
+@media(max-width:900px){
+  .side{width:190px!important}
+  .main{margin-left:190px!important;width:calc(100% - 190px)!important}
+  .main>header{left:190px!important}
+  body.survey-intake-preview .main{margin-left:190px!important;width:calc(100% - 190px)!important}
+  body.survey-intake-preview .main>header{left:190px!important}
+  .atlas-logo{padding:0 14px!important}.atlas-logo svg{width:50px;flex-basis:50px}
+}
+
+/* Keep the primary CRM action visible on every existing CRM client view. */
+#crm-page .crm-actions{display:flex!important;align-items:center!important;gap:9px!important}
+#crm-page #contextAdd{display:inline-flex!important;align-items:center!important;justify-content:center!important;white-space:nowrap!important}
+
+/* Event Survey Requests uses the established Job Management page language. */
+.event-survey-requests-page{padding:28px 34px 50px}
+.event-survey-table .event-survey-row{grid-template-columns:.72fr .78fr 1.15fr 1.25fr .7fr .55fr}
+.event-survey-empty{min-height:240px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;color:#667085;background:#fff}
+.event-survey-empty-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:#eef4fb;color:#153e69;font-size:23px}
+.event-survey-empty b{color:#172033;font-size:13px}.event-survey-empty span:last-child{font-size:12px}
+</style>
+<script id="event-survey-request-route">
+(function(){
+  const link=document.querySelector('.job-event-survey-requests-link');
+  const page=document.getElementById('event-survey-requests-page');
+  if(!link||!page)return;
+
+  function selectEventSurveyPage(){
+    document.querySelectorAll('.side .nav,.side .subnav a').forEach(function(item){
+      item.classList.remove('active','selected','subnav-active','job-page-selected');
+      item.removeAttribute('aria-current');
+    });
+    link.classList.add('job-page-selected');
+    link.setAttribute('aria-current','page');
+    const subnav=link.closest('.subnav');
+    subnav?.classList.add('open');
+    subnav?.previousElementSibling?.classList.add('open');
+  }
+
+  function openEventSurveyPage(event){
+    event?.preventDefault();
+    event?.stopImmediatePropagation();
+    document.querySelectorAll('.page-view').forEach(function(view){
+      view.classList.remove('active');
+      view.style.setProperty('display','none','important');
+    });
+    page.classList.add('active');
+    page.style.setProperty('display','block','important');
+    selectEventSurveyPage();
+    window.scrollTo(0,0);
+  }
+
+  link.addEventListener('click',openEventSurveyPage,true);
+  document.querySelectorAll('.side > a.nav:not(.page-link)').forEach(function(item){
+    item.addEventListener('click',function(event){event.preventDefault();});
+  });
 })();
 </script>
 </body></html>
