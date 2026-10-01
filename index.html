@@ -5323,7 +5323,7 @@ button[style*="#1E3B8A"]:hover{
 <main class="survey-view-page">
   <div class="survey-view-head">
     <div><button type="button" class="back-client-link" id="surveyViewBack">← Back to Survey Requests</button><h1>Survey Request Details</h1><p>Review the submitted request, property information, and current status.</p></div>
-    <div class="survey-view-actions"><button type="button" class="survey-view-edit" id="surveyViewEdit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4l11-11-4-4L4 16v4Z"/><path d="m13.5 6.5 4 4"/></svg><span>Edit Request</span></button><button type="button" class="survey-view-download" id="surveyViewDownload"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="m8 11 4 4 4-4"/><path d="M5 20h14"/></svg><span>Download PDF</span></button><button type="button" class="survey-request-primary" id="surveyViewPrimary" onclick="window.__quoteBackOrigin='view-survey-request-page'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg><span>View Quote</span></button></div>
+    <div class="survey-view-actions"><button type="button" class="survey-view-download" id="surveyViewDownload"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="m8 11 4 4 4-4"/><path d="M5 20h14"/></svg><span>Download PDF</span></button><button type="button" class="survey-view-edit-primary" id="surveyViewEdit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4l11-11-4-4L4 16v4Z"/><path d="m13.5 6.5 4 4"/></svg><span>Edit Request</span></button><button type="button" class="survey-view-quote-secondary" id="surveyViewPrimary" onclick="window.__quoteBackOrigin='view-survey-request-page'"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg><span>View Quote</span></button></div>
   </div>
   <div class="survey-form-preview">
     <section class="survey-preview-card survey-request-summary-card">
@@ -10727,6 +10727,10 @@ document.getElementById('noteSearch').oninput=e=>{const q=e.target.value.toLower
 .survey-view-edit:hover{border-color:#667085;background:#f8fafc}
 .survey-view-download{border:1px solid #98a2b3;background:#fff;color:#172033}
 .survey-view-download:hover{border-color:#667085;background:#f8fafc}
+.survey-view-edit-primary,.survey-view-quote-primary{border:1px solid #153e69!important;background:#153e69!important;color:#fff!important}
+.survey-view-edit-primary:hover,.survey-view-quote-primary:hover{border-color:#0f3156!important;background:#0f3156!important;color:#fff!important}
+.survey-view-edit-secondary,.survey-view-quote-secondary{border:1px solid #98a2b3!important;background:#fff!important;color:#172033!important}
+.survey-view-edit-secondary:hover,.survey-view-quote-secondary:hover{border-color:#667085!important;background:#f8fafc!important;color:#172033!important}
 #view-survey-request-page #surveyViewPrimary{border:1px solid #153e69;background:#153e69;color:#fff}
 #view-survey-request-page #surveyViewPrimary:hover{border-color:#0f3155;background:#0f3155}
 #survey-requests-page .survey-row>div:last-child{
@@ -10942,7 +10946,10 @@ document.getElementById('noteSearch').oninput=e=>{const q=e.target.value.toLower
     const tableItems=document.getElementById('svTableAItems');if(tableItems)tableItems.innerHTML=(intake.tableACodes||[]).map(function(code){const detail=intake.tableADetails?.[code];return '<div class="survey-readonly-item"><span class="survey-readonly-check">✓</span><span class="survey-readonly-code">Item '+code+'</span><div class="survey-readonly-copy"><b>'+tableADescriptions[code]+'</b>'+(detail?'<div class="survey-client-detail"><h4>Client specification</h4><p>'+detail+'</p></div>':'')+'</div></div>';}).join('')||'<div class="survey-readonly-item"><span class="survey-readonly-code">None</span><div class="survey-readonly-copy"><p>No optional Table A items were selected.</p></div></div>';
     const signatureImage=document.getElementById('svSignatureImage'),signatureFallback=document.getElementById('svSignatureFallback'),savedSignature=document.getElementById('altaClientSignatureData')?.value||'';if(signatureImage&&signatureFallback){if(savedSignature){signatureImage.src=savedSignature;signatureImage.style.display='block';signatureFallback.style.display='none';}else{signatureImage.removeAttribute('src');signatureImage.style.display='none';signatureFallback.style.display='block';}}
     const statusElement=document.getElementById('svStatus');if(statusElement)statusElement.className='survey-status '+status.toLowerCase();
-    const action=document.getElementById('surveyViewPrimary'),edit=document.getElementById('surveyViewEdit'),download=document.getElementById('surveyViewDownload'),hasQuote=/^(quoted|approved)$/i.test(status);if(action)action.style.display=hasQuote?'inline-flex':'none';if(edit)edit.style.display='inline-flex';if(download)download.style.display='inline-flex';
+    const action=document.getElementById('surveyViewPrimary'),edit=document.getElementById('surveyViewEdit'),download=document.getElementById('surveyViewDownload'),hasQuote=/^(quoted|approved)$/i.test(status);
+    if(action){action.style.display=hasQuote?'inline-flex':'none';action.className=hasQuote?'survey-view-quote-primary':'survey-view-quote-secondary';}
+    if(edit){edit.style.display='inline-flex';edit.className=hasQuote?'survey-view-edit-secondary':'survey-view-edit-primary';}
+    if(download)download.style.display='inline-flex';
     show(view);
   }
   document.addEventListener('click',function(e){
